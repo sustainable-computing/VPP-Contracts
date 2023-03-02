@@ -1,0 +1,26 @@
+general:
+  start_date: 01-07-2018
+  n_days: 1944
+  time_step: 1.00 #hours
+  n_panels: 100
+sessions_processing:
+  daily_observations: 24
+  charging_speed: 11 #kW # 11
+  soc_min: 0
+  soc_max: 1
+  battery_capacity: 80 #80 
+  battery_start:
+    mean: 0.49
+    scale: 0.25
+    lower_bound: 0.26
+    upper_bound: 0.73
+pv_supply_processing:
+  correction_factor: 0.9
+  conversion_factor: 2.78
+  size_pv_panel: 234.3 #156cmx156cm
+pv_prices_processing:
+  perc_diff: 0.2
+pv_costs_processing:
+  unit_costs: 20 #per kWh
+  lifetime_hours: 262800
+  discount_rate: 0.05

@@ -1,0 +1,15 @@
+model_specifics:
+  iterations: 1
+  upper_capacity_charging: 11
+  upper_capacity_discharging: 11
+  soc_min: 0
+  soc_max: 100
+  delta_t: 0.25
+  efficiency_charging: 0.95
+  efficiency_discharging: 0.95
+
+run_models:
+  test-model:
+    type: ['sch', 'v2g']
+    sessions: [100]
+    n_panels: [20]

@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Javier
+env_vpp(
+.ipynb_checkpoints/
+*.swp
+*.pyc

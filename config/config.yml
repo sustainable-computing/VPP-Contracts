@@ -1,0 +1,5 @@
+project_name: 'thesis_bim'
+logfile: 'logfile.log'
+
+run_settings:
+  run_eda: False
