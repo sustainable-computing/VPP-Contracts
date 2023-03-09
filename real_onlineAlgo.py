@@ -43,7 +43,7 @@ parser.add_argument("-W", "--skewed", help = "Whether to skew owner types left (
 args = parser.parse_args()
 
 #n_ev = get_types_and_possible_discharge_e(util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_EV_dict'))
-n_ev = get_types_and_possible_discharge_e(util.load_result(r'new_expected_values/E_EV_dict'))
+n_ev = get_types_and_possible_discharge_e(util.load_result(r'data/new_expected_values/E_EV_dict'))
 
 EV_TYPES = ast.literal_eval(args.types)
 suffix = args.suffix
@@ -80,22 +80,22 @@ if args.skewed is not None:
 print(f"Running experiment with {EV_TYPES=}, {suffix=}, {TAU=}, {KAPPA=}, {GAMMA=}, {BAT_DEG=}, {perc_allow_EV_discharge=}, {res_dir=}, {bid_dir=}, {type_probs=}")
 # 20 - 40 mins depending on V2G participation, running on a desktop. Try snowball
 
-sampling_pv_gen_df = pd.read_csv('sampling_pv_data.csv', index_col='Date')
+sampling_pv_gen_df = pd.read_csv('data/sampling_pv_data.csv', index_col='Date')
 sampling_pv_gen_df.index = pd.to_datetime(sampling_pv_gen_df.index)
 
 # Javier chages to 2019
-pv_gen_test_df = pd.read_csv('real_data/2019_test_data_pv.csv', index_col='Date')
+pv_gen_test_df = pd.read_csv('data/real_data/2019_test_data_pv.csv', index_col='Date')
 pv_gen_test_df.index = pd.to_datetime(pv_gen_test_df.index)
 
-sampling_price_df = pd.read_csv('sampling_price_data.csv', index_col='Date')
+sampling_price_df = pd.read_csv('data/sampling_price_data.csv', index_col='Date')
 sampling_price_df.index = pd.to_datetime(sampling_price_df.index)
 
 # Javier changes to 2019
-price_test_df = pd.read_csv('real_data/2019_test_data_price.csv', index_col='Date')
+price_test_df = pd.read_csv('data/real_data/2019_test_data_price.csv', index_col='Date')
 price_test_df.index = pd.to_datetime(price_test_df.index)
 
 # Javier df_ev
-df_ev = pd.read_csv("real_data/df_elaad_preproc.csv", parse_dates = ["starttime_parking", "endtime_parking"])
+df_ev = pd.read_csv("data/real_data/df_elaad_preproc.csv", parse_dates = ["starttime_parking", "endtime_parking"])
 
 unique_dates = pv_gen_test_df.index.unique()
 sampling_unique_dates = sampling_pv_gen_df.index.unique()

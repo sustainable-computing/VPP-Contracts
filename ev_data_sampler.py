@@ -17,7 +17,7 @@ def read_yaml(file):
 		
 		
 #hour_dict = read_yaml(r'J:\Thesis_code\thesis_code_saidur\Thesis_Code_LATEST_ONLY\EV\num_ev_arrival_by_hour.yaml')
-hour_dict = read_yaml(r'num_ev_arrival_by_hour.yaml')
+hour_dict = read_yaml(r'data/num_ev_arrival_by_hour.yaml')
 
 def poisson_dist_func(lam, k):
     return (pow(lam,k) * np.exp(-1*lam))/math.factorial(k)
@@ -45,7 +45,7 @@ def sample_num_EV_arrivals(rng, hour):
 
 
 #stay_time_dict = read_yaml(r'J:\Thesis_code\thesis_code_saidur\Thesis_Code_LATEST_ONLY\EV\ev_stay_t_by_arrival_hour.yaml')
-stay_time_dict = read_yaml(r'ev_stay_t_by_arrival_hour.yaml')
+stay_time_dict = read_yaml(r'data/ev_stay_t_by_arrival_hour.yaml')
 
 
 #============ This function samples the EV stay time using Kernel Density Estimation ============ 

@@ -47,7 +47,7 @@ def create_ev_dict_from_df(df_ev, day): # day int: {0 - 364}
     return ev_dict
 
 def create_ev_dict(seed):
-    raise Exception("Using deprecated create de dict")
+    raise Exception("Using deprecated create ev dict")
     rng = np.random.default_rng(seed)
 
     FINAL_SOC = 0.97
@@ -295,7 +295,7 @@ def get_contract2(num_types, n_ev, tau):
 
 def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sampling_unique_dates, orig_ev_dict, ratio_EV_discharge, pv_gen_df, price_df, sampling_pv_gen_df, sampling_price_df, num_samples, all_bids_sample_paths, EV_TYPES=[1,2,3], TAU = 3, KAPPA = 0.1, GAMMA = 1, BAT_DEG = 1, ev_rng = None,type_probs = None):
     #E_im_price = util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_price_imbalance')
-    E_im_price = util.load_result(r'new_expected_values/E_price_imbalance')
+    E_im_price = util.load_result(r'data/new_expected_values/E_price_imbalance')
     do_print = False
     
     if ev_rng is None:
@@ -371,7 +371,7 @@ def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sam
         EFFECTIVE_TYPES = len(EV_TYPES)
 
         #n_ev = get_types_and_possible_discharge_e(util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_EV_dict'))
-        n_ev = get_types_and_possible_discharge_e(util.load_result(r'new_expected_values/E_EV_dict'))
+        n_ev = get_types_and_possible_discharge_e(util.load_result(r'data/new_expected_values/E_EV_dict'))
 
         #whole_contract = get_contract(NUM_EV_TYPES, n_ev, CONTRACT_TAU)
         whole_contract = get_contract_customtypes(EV_TYPES, n_ev=n_ev,
