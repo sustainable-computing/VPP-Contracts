@@ -8,10 +8,27 @@ This is the accompanying repo for the (pre-print) paper **Making a Virtual Power
 ## Overview
 
 The code is divided into two parts:
-* Simulation code for day ahead and imbalance operations
+* Simulation code for day ahead and imbalance markets operations
 * Contract formulation and results analysis inside the `ResultAnalysis/` directory.
 
 The requirements are in `requirements.txt`. Note, the convex optimization solver used was Mosek. Make sure to install the requirements and Mosek before running this code.
 
 ## Day Ahead
-To run the day ahead, use `python3 u`
+To run the day ahead, use `python3 get_da_bids.py -P <percent of EV participation> -N [number of samples]`
+
+For the baseline algorithm `-P` is set to 0 since no V2G participation is allowed, for all other bids `-P` is 100.
+
+For `-N` either 10 or 100 works well.
+
+## Imbalance market
+This is were the bulk of the computation happens, the main program is `real_onlineAlgo.py`. However, as it takes a lot of parameters, it is best to use a script such as `run_realData_pilot.sh` or `run_realData_one.sh`.
+
+The parameters are:
+
+| Parameter     | Description |
+|---------------|-------------|
+| -T, --Tau     | (aka $\ell_{V2G}$ in the paper) The length of time which a contract is valid |
+| -S, --suffix  | Suffix for the results file. | 
+| -Y, --types   | What types to consider, this argument is given as a list |
+| -P, --perc    | Percentage of vehicles that get a contract menu, 100 in all of our experiments |
+| -K, --kappa   | Coefficient for the VPP's utility function ($U_{VPP}$)
