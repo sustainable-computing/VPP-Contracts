@@ -47,7 +47,7 @@ The parameters are:
 
 :hourglass: Running time is around 1 hour per experiment and only a single core is used.
 
-### Other files :cloud_with_lightning:
+### Other files :ringed_planet:
 * **deterministic_solver_ev_penetration_no_solar.py**: This is the solver used for Eqn. 13, the DA da bids.
 * **ev_data_sampler.py**: This is used for sampling expected EV arrivals for the scenarios in Eqn. 13.
 * **generate_expected_EV_values.py**: This is used for sampling other values for the scenarios in Eqn. 13.
@@ -55,6 +55,7 @@ The parameters are:
 * **real_funcOnlineAlgo.py**: Here are some functions for `real_onlineAlgo.py`
 
 ## Contract formulation and Results Analysis
+These files can be found inside the `ResultAnalysis/` directory
 
 ### Contract :handshake:
 `contracts.py` This is where the optimization problem for contracts is solved, that is Eqn. 8. 
