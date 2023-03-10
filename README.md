@@ -13,7 +13,7 @@ The code is divided into two parts:
 
 The requirements are in `requirements.txt`. Note, the convex optimization solver used was Mosek. Make sure to install the requirements and Mosek before running this code.
 
-## Day Ahead
+## Day Ahead :moneybag:
 To run the day ahead, use: 
 
 `$ python3 get_da_bids.py -P <percent of EV participation> -N [number of samples]`
@@ -22,7 +22,7 @@ For the baseline algorithm `-P` is set to 0 since no V2G participation is allowe
 
 For `-N` either 10 or 100 works well.
 
-## Imbalance market and Online Algorithm 
+## Imbalance market and Online Algorithm :car:
 This is were the bulk of the computation happens, the main program is `real_onlineAlgo.py`. However, as it takes a lot of parameters, it is best to use a script such as `run_realData_pilot.sh` or `run_realData_one.sh`.
 
 Usage: 
@@ -45,9 +45,9 @@ The parameters are:
 | -E, --seed    | Seed for the random number generator |
 |-W, --skewed   | If the type distribution is skewed (or biased), only implemented for 5 types. Default is 0. Results not present in paper |
 
-Running time is around 1 hour per experiment and only a single core is used.
+:hourglass: Running time is around 1 hour per experiment and only a single core is used.
 
-### Other files
+### Other files :cloud_with_lightning:
 * **deterministic_solver_ev_penetration_no_solar.py**: This is the solver used for Eqn. 13, the DA da bids.
 * **ev_data_sampler.py**: This is used for sampling expected EV arrivals for the scenarios in Eqn. 13.
 * **generate_expected_EV_values.py**: This is used for sampling other values for the scenarios in Eqn. 13.
@@ -56,10 +56,10 @@ Running time is around 1 hour per experiment and only a single core is used.
 
 ## Contract formulation and Results Analysis
 
-### Contract
-`contracts.py` This is where the optimization problem for contracts is solved, that is Eqn. 8.
+### Contract :handshake:
+`contracts.py` This is where the optimization problem for contracts is solved, that is Eqn. 8. :balance_scale:
 
-### 1OptimizationRuntime
+### 1OptimizationRuntime :chart_with_upwards_trend:
 This notebook measures and compares the runtime of solving Eqn. 7 & 8
 
 ### 2OptimalContracts
@@ -78,8 +78,13 @@ Short notebook on exploratory data analysis (EDA) of electricity prices. This no
 A longer notebook on EDA, also including EV arrivals. This notebook can be ignored
 
 ### 7PreprocessElaad
+Here the Elaad dataset is preprocessed as decribed on section 7.1 of the paper
+
+### 8NewBids :bar_chart:
+Here figures 3 and 4 are created. The results for many different runs of the online algorithm are analyzed. 
 
 
 ### Other files
 * **sensitivity.py**: Helper functions for notebooks 2 and 3
+* **analysis_tools.py**: Helper functions for notebook 8
 
