@@ -5,7 +5,6 @@ import sys
 import numpy as np
 import pandas as pd
 import yaml
-#from tqdm.notebook import tqdm_notebook
 import scipy
 import os
 import cvxpy as cp
@@ -19,9 +18,8 @@ import ast
 
 # Saidur's functions
 from utility import utility as util
-#from utility import utils as utils # Not used
-import latest_deterministic_solver_ev_penetration
-import new_ev_scheduler_v3 as new_ev_scheduler
+# import latest_deterministic_solver_ev_penetration # Not used
+import ev_scheduler 
 import generate_expected_EV_values as E_ev_generator
 import ev_data_sampler
 
@@ -42,7 +40,6 @@ parser.add_argument("-E", "--seed", help = "Seed for the rng", type=int, require
 parser.add_argument("-W", "--skewed", help = "Whether to skew owner types left (-1), uniform (0), or right (1)", type=int, required=False)
 args = parser.parse_args()
 
-#n_ev = get_types_and_possible_discharge_e(util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_EV_dict'))
 n_ev = get_types_and_possible_discharge_e(util.load_result(r'data/new_expected_values/E_EV_dict'))
 
 EV_TYPES = ast.literal_eval(args.types)
@@ -78,23 +75,24 @@ if args.skewed is not None:
         type_probs = [0.04, 0.12, 0.2 , 0.28, 0.36]
 
 print(f"Running experiment with {EV_TYPES=}, {suffix=}, {TAU=}, {KAPPA=}, {GAMMA=}, {BAT_DEG=}, {perc_allow_EV_discharge=}, {res_dir=}, {bid_dir=}, {type_probs=}")
-# 20 - 40 mins depending on V2G participation, running on a desktop. Try snowball
+
+# Runtime: ~50 mins
 
 sampling_pv_gen_df = pd.read_csv('data/sampling_pv_data.csv', index_col='Date')
 sampling_pv_gen_df.index = pd.to_datetime(sampling_pv_gen_df.index)
 
-# Javier chages to 2019
+# Load data from 2019
 pv_gen_test_df = pd.read_csv('data/real_data/2019_test_data_pv.csv', index_col='Date')
 pv_gen_test_df.index = pd.to_datetime(pv_gen_test_df.index)
 
 sampling_price_df = pd.read_csv('data/sampling_price_data.csv', index_col='Date')
 sampling_price_df.index = pd.to_datetime(sampling_price_df.index)
 
-# Javier changes to 2019
+# Load data from 2019
 price_test_df = pd.read_csv('data/real_data/2019_test_data_price.csv', index_col='Date')
 price_test_df.index = pd.to_datetime(price_test_df.index)
 
-# Javier df_ev
+# EV charging sessions
 df_ev = pd.read_csv("data/real_data/df_elaad_preproc.csv", parse_dates = ["starttime_parking", "endtime_parking"])
 
 unique_dates = pv_gen_test_df.index.unique()
@@ -168,7 +166,7 @@ while(flag == 1):
                     
                     # Using Monte Carlo simulation results
                     #all_bids_sample_paths = util.load_result(('bids_no_solar/{}_perc'.format(perc)+'/bid_sample_path_'+str(perc)+'_perc'))
-                    bid_perc = 0
+                    bid_perc = perc
                     all_bids_sample_paths = util.load_result(('{}{}_perc'.format(bid_dir, bid_perc)+'/bid_sample_path_'+str(bid_perc)+'_perc'))
                     total, im_buy, im_sell, time_to_full_soc, num_v2g_evs_no_contract, num_v2g_evs_w_contract, da_revenue, retail_revenue, owner_pay, assigned_type, realized_type = get_online_alg_result_mc_simul(seed+run, day_no, date, unique_dates, sampling_unique_dates, ev_dict, perc, pv_gen_test_df, price_test_df, sampling_pv_gen_df, sampling_price_df, num_samples, all_bids_sample_paths, EV_TYPES = EV_TYPES, TAU = TAU , KAPPA = KAPPA, GAMMA = GAMMA, BAT_DEG = BAT_DEG, ev_rng = ev_rng, type_probs = type_probs)
                     total_revenue_lst_E_stage_1.append(total)

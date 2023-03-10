@@ -10,9 +10,9 @@ import numpy.random as rand
 from scipy.stats import truncnorm
 import sys
 from utility import utility as util
-import new_ev_scheduler_v3 as new_ev_scheduler
+import ev_scheduler
 import ev_data_sampler
-from Contract_Reproduction.contracts import get_contract_customtypes
+from ResultAnalysis.contracts import get_contract_customtypes
 
 def create_ev_dict_from_df(df_ev, day): # day int: {0 - 364}
     FINAL_SOC = 0.97
@@ -544,7 +544,7 @@ def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sam
                         
             if(len(available_v2g_ev_lst) > 0):
                                 
-                found_ev_schedule = new_ev_scheduler.main(seed, available_v2g_ev_lst, current_time, E_im_price, updated_E_VPP, CONTRACT_TAU)
+                found_ev_schedule = ev_scheduler.main(seed, available_v2g_ev_lst, current_time, E_im_price, updated_E_VPP, CONTRACT_TAU)
                 
                 for ev_idx, my_ev in enumerate(available_v2g_ev_lst):
 
