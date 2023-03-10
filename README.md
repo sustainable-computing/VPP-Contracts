@@ -13,7 +13,7 @@ The code is divided into two parts:
 
 The requirements are in `requirements.txt`. Note, the convex optimization solver used was Mosek. Make sure to install the requirements and Mosek before running this code.
 
-## Day Ahead :moneybag:
+## Day Ahead :sun_with_face:
 To run the day ahead, use: 
 
 `$ python3 get_da_bids.py -P <percent of EV participation> -N [number of samples]`
