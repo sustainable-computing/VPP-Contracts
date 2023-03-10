@@ -22,7 +22,7 @@ For the baseline algorithm `-P` is set to 0 since no V2G participation is allowe
 
 For `-N` either 10 or 100 works well.
 
-## Imbalance market and Online Algorithm :car:
+## Imbalance market and Online Algorithm :car: :car: :car: :car: :car: :car:
 This is were the bulk of the computation happens, the main program is `real_onlineAlgo.py`. However, as it takes a lot of parameters, it is best to use a script such as `run_realData_pilot.sh` or `run_realData_one.sh`.
 
 Usage: 
@@ -57,7 +57,7 @@ The parameters are:
 ## Contract formulation and Results Analysis
 
 ### Contract :handshake:
-`contracts.py` This is where the optimization problem for contracts is solved, that is Eqn. 8. :balance_scale:
+`contracts.py` This is where the optimization problem for contracts is solved, that is Eqn. 8. 
 
 ### 1OptimizationRuntime :chart_with_upwards_trend:
 This notebook measures and compares the runtime of solving Eqn. 7 & 8
@@ -65,7 +65,7 @@ This notebook measures and compares the runtime of solving Eqn. 7 & 8
 ### 2OptimalContracts
 This notebook had previous drafts for the analysis of optimal contracts. This notebook can be ignored.
 
-### 3ContractValues
+### 3ContractValues :balance_scale:
 Notebook for Figure 2 and Figure 5. Also, investigates the behaviour of Eqn. 8 under different parameters. 
 
 ### 4ReloadFigSched
@@ -77,14 +77,14 @@ Short notebook on exploratory data analysis (EDA) of electricity prices. This no
 ### 6DatasetsEDA
 A longer notebook on EDA, also including EV arrivals. This notebook can be ignored
 
-### 7PreprocessElaad
+### 7PreprocessElaad :cityscape:
 Here the Elaad dataset is preprocessed as decribed on section 7.1 of the paper
 
 ### 8NewBids :bar_chart:
 Here figures 3 and 4 are created. The results for many different runs of the online algorithm are analyzed. 
 
 
-### Other files
+### Other files :owl:
 * **sensitivity.py**: Helper functions for notebooks 2 and 3
 * **analysis_tools.py**: Helper functions for notebook 8
 
