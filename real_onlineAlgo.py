@@ -5,21 +5,22 @@ import sys
 import numpy as np
 import pandas as pd
 import yaml
-import scipy
+#from tqdm.notebook import tqdm_notebook
+import scipy # type: ignore
 import os
-import cvxpy as cp
+import cvxpy as cp # type: ignore
 import numpy.random as rand
 from tqdm import tqdm
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # type: ignore
 import pandas as pd
-from scipy.stats import truncnorm
+from scipy.stats import truncnorm # type: ignore
 import argparse
 import ast
 
 # Saidur's functions
 from utility import utility as util
-# import latest_deterministic_solver_ev_penetration # Not used
-import ev_scheduler 
+#from utility import utils as utils # Not used
+import new_ev_scheduler_v3 as new_ev_scheduler
 import generate_expected_EV_values as E_ev_generator
 import ev_data_sampler
 
@@ -40,7 +41,8 @@ parser.add_argument("-E", "--seed", help = "Seed for the rng", type=int, require
 parser.add_argument("-W", "--skewed", help = "Whether to skew owner types left (-1), uniform (0), or right (1)", type=int, required=False)
 args = parser.parse_args()
 
-n_ev = get_types_and_possible_discharge_e(util.load_result(r'data/new_expected_values/E_EV_dict'))
+#n_ev = get_types_and_possible_discharge_e(util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_EV_dict'))
+n_ev = get_types_and_possible_discharge_e(util.load_result(r'new_expected_values/E_EV_dict'))
 
 EV_TYPES = ast.literal_eval(args.types)
 suffix = args.suffix
@@ -75,29 +77,27 @@ if args.skewed is not None:
         type_probs = [0.04, 0.12, 0.2 , 0.28, 0.36]
 
 print(f"Running experiment with {EV_TYPES=}, {suffix=}, {TAU=}, {KAPPA=}, {GAMMA=}, {BAT_DEG=}, {perc_allow_EV_discharge=}, {res_dir=}, {bid_dir=}, {type_probs=}")
+# 20 - 40 mins depending on V2G participation, running on a desktop. Try snowball
 
-# Runtime: ~50 mins
-
-sampling_pv_gen_df = pd.read_csv('data/sampling_pv_data.csv', index_col='Date')
+sampling_pv_gen_df = pd.read_csv('sampling_pv_data.csv', index_col='Date')
 sampling_pv_gen_df.index = pd.to_datetime(sampling_pv_gen_df.index)
 
-# Load data from 2019
-pv_gen_test_df = pd.read_csv('data/real_data/2019_test_data_pv.csv', index_col='Date')
+# Javier chages to 2019
+pv_gen_test_df = pd.read_csv('real_data/2019_test_data_pv.csv', index_col='Date')
 pv_gen_test_df.index = pd.to_datetime(pv_gen_test_df.index)
 
-sampling_price_df = pd.read_csv('data/sampling_price_data.csv', index_col='Date')
+sampling_price_df = pd.read_csv('sampling_price_data.csv', index_col='Date')
 sampling_price_df.index = pd.to_datetime(sampling_price_df.index)
 
-# Load data from 2019
-price_test_df = pd.read_csv('data/real_data/2019_test_data_price.csv', index_col='Date')
+# Javier changes to 2019
+price_test_df = pd.read_csv('real_data/2019_test_data_price.csv', index_col='Date')
 price_test_df.index = pd.to_datetime(price_test_df.index)
 
-# EV charging sessions
-df_ev = pd.read_csv("data/real_data/df_elaad_preproc.csv", parse_dates = ["starttime_parking", "endtime_parking"])
+# Javier df_ev
+df_ev = pd.read_csv("real_data/df_elaad_preproc.csv", parse_dates = ["starttime_parking", "endtime_parking"])
 
 unique_dates = pv_gen_test_df.index.unique()
 sampling_unique_dates = sampling_pv_gen_df.index.unique()
-
 
 #seed_lst = [777]
 #seed_lst = [778]
@@ -145,7 +145,7 @@ while(flag == 1):
                 
                 #_, bids = perform_monte_carlo_simul(seed, unique_dates, perc, pv_gen_test_df, price_test_df)
                                 
-                for day_no, date in enumerate(tqdm(unique_dates, total=len(unique_dates))):
+                for day_no, date in enumerate(tqdm(unique_dates, total=len(unique_dates), desc=suffix)):
                     current_pv_gen_lst = np.array(list(pv_gen_test_df.loc[(pv_gen_test_df.index == date)]['PV_Vol']))
                     current_da_price_lst = np.array(list(price_test_df.loc[(price_test_df.index == date)]['price_da']))
                     current_im_price_lst = np.array(list(price_test_df.loc[(price_test_df.index == date)]['price_imbalance']))

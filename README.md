@@ -53,11 +53,12 @@ The parameters are:
 * **deterministic_solver_ev_penetration_no_solar.py**: This is the solver used for Eqn. 13, the DA da bids.
 * **ev_data_sampler.py**: This is used for sampling expected EV arrivals for the scenarios in Eqn. 13.
 * **generate_expected_EV_values.py**: This is used for sampling other values for the scenarios in Eqn. 13.
-* **ev_scheduler.py**: This is used to solve Eqn. 16.
+* **new_ev_scheduler_v3.py**: This is used to solve Eqn. 16.
 * **real_funcOnlineAlgo.py**: Here are some functions for `real_onlineAlgo.py`
+* **nov2g_onlineAlgo.py, nov2g_funcOnlineAlgo.py, run_nov2g.sh, nov2g_ev_scheduler_v3.py***: Files necessary to run the `No-V2G` baseline
 
 ## Contract formulation and Results Analysis
-These files can be found inside the `ResultAnalysis/` directory
+These files can be found inside the `Contract_Reproduction/` directory
 
 ### Contract :handshake:
 `contracts.py` This is where the optimization problem for contracts is solved, that is Eqn. 8. 

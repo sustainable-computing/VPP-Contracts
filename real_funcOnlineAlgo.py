@@ -3,16 +3,16 @@
 
 import numpy as np
 import math
-import scipy
+import scipy # type: ignore
 import os
-import cvxpy as cp
+import cvxpy as cp # type: ignore
 import numpy.random as rand
-from scipy.stats import truncnorm
+from scipy.stats import truncnorm # type: ignore
 import sys
 from utility import utility as util
-import ev_scheduler
+import new_ev_scheduler_v3 as new_ev_scheduler
 import ev_data_sampler
-from ResultAnalysis.contracts import get_contract_customtypes
+from Contract_Reproduction.contracts import get_contract_customtypes
 
 def create_ev_dict_from_df(df_ev, day): # day int: {0 - 364}
     FINAL_SOC = 0.97
@@ -47,7 +47,7 @@ def create_ev_dict_from_df(df_ev, day): # day int: {0 - 364}
     return ev_dict
 
 def create_ev_dict(seed):
-    raise Exception("Using deprecated create ev dict")
+    raise Exception("Using deprecated create de dict")
     rng = np.random.default_rng(seed)
 
     FINAL_SOC = 0.97
@@ -153,7 +153,7 @@ def charge_EV(ev, e_charging):
     if(ev.remanining_contract_duration > 0):
         ev.remanining_contract_duration -= 1
     ev.laxity = ev.stay_time - ((ev.soc_final - ev.soc_t) * ev.battery_cap)/(ev.alpha_c * ETA_C)
-    if(ev.laxity == 0):
+    if(ev.laxity == 0): # ?
         ev.laxity = 0
     ev.bool_c_d = True
     
@@ -295,7 +295,7 @@ def get_contract2(num_types, n_ev, tau):
 
 def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sampling_unique_dates, orig_ev_dict, ratio_EV_discharge, pv_gen_df, price_df, sampling_pv_gen_df, sampling_price_df, num_samples, all_bids_sample_paths, EV_TYPES=[1,2,3], TAU = 3, KAPPA = 0.1, GAMMA = 1, BAT_DEG = 1, ev_rng = None,type_probs = None):
     #E_im_price = util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_price_imbalance')
-    E_im_price = util.load_result(r'data/new_expected_values/E_price_imbalance')
+    E_im_price = util.load_result(r'new_expected_values/E_price_imbalance')
     do_print = False
     
     if ev_rng is None:
@@ -353,6 +353,7 @@ def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sam
         da_price_lst = np.array(list(price_df.loc[(price_df.index == current_date)]['price_da']))
         im_price_lst = np.array(list(price_df.loc[(price_df.index == current_date)]['price_imbalance']))
 
+        
         for idx, p in enumerate(im_price_lst):
             if p < 0:
                 im_price_lst[idx] = 0
@@ -362,6 +363,9 @@ def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sam
             if p < 0:
                 da_price_lst[idx] = 0
                 
+        # JS: Experiment, perfect forecasts
+        #E_im_price = im_price_lst
+
         
         CONTRACT_TAU = TAU
         NUM_EV_TYPES = len(EV_TYPES)
@@ -371,7 +375,7 @@ def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sam
         EFFECTIVE_TYPES = len(EV_TYPES)
 
         #n_ev = get_types_and_possible_discharge_e(util.load_result(r'J:\Thesis_code\thesis_code_saidur\thesis_code_new_22\new_expected_values\E_EV_dict'))
-        n_ev = get_types_and_possible_discharge_e(util.load_result(r'data/new_expected_values/E_EV_dict'))
+        n_ev = get_types_and_possible_discharge_e(util.load_result(r'new_expected_values/E_EV_dict'))
 
         #whole_contract = get_contract(NUM_EV_TYPES, n_ev, CONTRACT_TAU)
         whole_contract = get_contract_customtypes(EV_TYPES, n_ev=n_ev,
@@ -544,7 +548,7 @@ def get_online_alg_result_mc_simul(seed, day_no, current_date, unique_dates, sam
                         
             if(len(available_v2g_ev_lst) > 0):
                                 
-                found_ev_schedule = ev_scheduler.main(seed, available_v2g_ev_lst, current_time, E_im_price, updated_E_VPP, CONTRACT_TAU)
+                found_ev_schedule = new_ev_scheduler.main(seed, available_v2g_ev_lst, current_time, E_im_price, updated_E_VPP, CONTRACT_TAU)
                 
                 for ev_idx, my_ev in enumerate(available_v2g_ev_lst):
 
