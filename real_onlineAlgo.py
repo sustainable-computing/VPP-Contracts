@@ -79,14 +79,14 @@ if args.skewed is not None:
 print(f"Running experiment with {EV_TYPES=}, {suffix=}, {TAU=}, {KAPPA=}, {GAMMA=}, {BAT_DEG=}, {perc_allow_EV_discharge=}, {res_dir=}, {bid_dir=}, {type_probs=}")
 # 20 - 40 mins depending on V2G participation, running on a desktop. Try snowball
 
-sampling_pv_gen_df = pd.read_csv('sampling_pv_data.csv', index_col='Date')
+sampling_pv_gen_df = pd.read_csv('data/sampling_pv_data.csv', index_col='Date')
 sampling_pv_gen_df.index = pd.to_datetime(sampling_pv_gen_df.index)
 
 # Javier chages to 2019
 pv_gen_test_df = pd.read_csv('real_data/2019_test_data_pv.csv', index_col='Date')
 pv_gen_test_df.index = pd.to_datetime(pv_gen_test_df.index)
 
-sampling_price_df = pd.read_csv('sampling_price_data.csv', index_col='Date')
+sampling_price_df = pd.read_csv('data/sampling_price_data.csv', index_col='Date')
 sampling_price_df.index = pd.to_datetime(sampling_price_df.index)
 
 # Javier changes to 2019
