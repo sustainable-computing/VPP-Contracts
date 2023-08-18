@@ -1,0 +1,3 @@
+# Datasets :owl:
+* `real_data/df_elaad_preproc.csv`: This contains the information for arrival/departure time, and energy requirements of the EVs and can be downloaded from the [ElaadNL platform](https://platform.elaad.io/). There is a pre-processing step that can be found in `Contract_Reproduction/7PreprocessElaad.ipynb`
+* `real_data/2019_test_data_price.csv`: Contains the day-ahead and imbalance markets price for electricity per kWh. The day-ahead data is from the [Entso-E Transparency Platform](https://transparency.entsoe.eu/), and the imbalance market is from [Tennet](https://www.tennet.org/english/operational_management/export_data.aspx).

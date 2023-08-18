@@ -1,6 +1,6 @@
 # VPP-Contracts
 
-This is the accompanying repo for the (pre-print) paper **Making a Virtual Power Plant out of Privately Owned Electric Vehicles: From Contract Design to Scheduling** by Saidur Rahman, Javier Sales-Ortiz and Omid Ardakanian.
+This is the accompanying repo for the paper [Making a Virtual Power Plant out of Privately Owned Electric Vehicles: From Contract Design to Scheduling](https://dl.acm.org/doi/abs/10.1145/3575813.3597353) by Saidur Rahman, Javier Sales-Ortiz and Omid Ardakanian. The PDF is also present in this repo with the name `V2GContracts-eEnergy23.pdf`.
 
 ## Abstract
 With the rollout of bidirectional chargers, electric vehicle (EV) battery packs can be used in lieu of utility-scale energy storage systems to support the grid. These batteries, if aggregated and coordinated at scale, will act as a virtual power plant (VPP) that could offer flexibility and other services to the grid. To realize this vision, EV owners must be incentivized to let their battery be discharged before it is charged to the desired level. In this paper, we use contract theory to design incentive-compatible, fixed-term contracts between the VPP and EV owners. Each contract defines the maximum amount of energy that can be discharged from an EV battery and exported to the grid over a certain period of time, and the compensation paid to the EV owner upon successful execution of the contract, for reducing the cycle life of their battery. We then propose an algorithm for the optimal operation of this VPP that participates in day-ahead and balancing markets. This algorithm maximizes the expected VPP profit by taking advantage of the accepted contracts that are still valid, while honoring day-ahead commitments and fulfilling the charging demand of each EV by its deadline. We show through simulation that by offering a menu of fixed-term contracts to EVs that arrive at the charging station, trading energy and scheduling EV charging according to the proposed algorithm, the VPP profitability increases by up to 12.2%, while allow
@@ -14,6 +14,8 @@ The code is divided into two parts:
 The requirements are in `requirements.txt`. Note, the convex optimization solver used was Mosek. Make sure to install the requirements and Mosek before running this code.
 
 ## Datasets :owl:
+Data is distributed in the directories `data/` and `real_data/`. The `data/` contains predictions and statistics obtained from the files in `real_data/`, of which the two most important ones are:
+
 * `real_data/df_elaad_preproc.csv`: This contains the information for arrival/departure time, and energy requirements of the EVs and can be downloaded from the [ElaadNL platform](https://platform.elaad.io/). There is a pre-processing step that can be found in `Contract_Reproduction/7PreprocessElaad.ipynb`
 * `real_data/2019_test_data_price.csv`: Contains the day-ahead and imbalance markets price for electricity per kWh. The day-ahead data is from the [Entso-E Transparency Platform](https://transparency.entsoe.eu/), and the imbalance market is from [Tennet](https://www.tennet.org/english/operational_management/export_data.aspx).
 
