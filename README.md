@@ -18,7 +18,7 @@ The requirements are in `requirements.txt`. Note, the convex optimization solver
 * `real_data/2019_test_data_price.csv`: Contains the day-ahead and imbalance markets price for electricity per kWh. The day-ahead data s from the [Entso-E Transparency Platform](https://transparency.entsoe.eu/), and the imbalance market is from [Tennet](https://www.tennet.org/english/operational_management/export_data.aspx).
 
 ## Day Ahead :sun_with_face:
-To run the day ahead, use: 
+To run the Wait-and-See process to find the day ahead bids, use: 
 
 `$ python3 get_da_bids.py -P <percent of EV participation> -N [number of samples]`
 
