@@ -92,7 +92,7 @@ Here the Elaad dataset is preprocessed as decribed on section 7.1 of the paper
 Here figures 3 and 4 are created. The results for many different runs of the online algorithm are analyzed. 
 
 
-### Other files :owl:
-* **sensitivity.py**: Helper functions for notebooks 2 and 3
-* **analysis_tools.py**: Helper functions for notebook 8
+### Other files :book:
+* `sensitivity.py`: Helper functions for notebooks 2 and 3
+* `analysis_tools.py`: Helper functions for notebook 8
 
