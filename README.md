@@ -5,7 +5,7 @@ This is the accompanying repo for the (pre-print) paper **Making a Virtual Power
 ## Abstract
 With the rollout of bidirectional chargers, electric vehicle (EV) battery packs can be used in lieu of utility-scale energy storage systems to support the grid. These batteries, if aggregated and coordinated at scale, will act as a virtual power plant (VPP) that could offer flexibility and other services to the grid. To realize this vision, EV owners must be incentivized to let their battery be discharged before it is charged to the desired level. In this paper, we use contract theory to design incentive-compatible, fixed-term contracts between the VPP and EV owners. Each contract defines the maximum amount of energy that can be discharged from an EV battery and exported to the grid over a certain period of time, and the compensation paid to the EV owner upon successful execution of the contract, for reducing the cycle life of their battery. We then propose an algorithm for the optimal operation of this VPP that participates in day-ahead and balancing markets. This algorithm maximizes the expected VPP profit by taking advantage of the accepted contracts that are still valid, while honoring day-ahead commitments and fulfilling the charging demand of each EV by its deadline. We show through simulation that by offering a menu of fixed-term contracts to EVs that arrive at the charging station, trading energy and scheduling EV charging according to the proposed algorithm, the VPP profitability increases by up to 12.2%, while allow
 
-## Overview
+## Overview :motorway:
 
 The code is divided into two parts:
 * Simulation code for day ahead (DA) and imbalance markets (IM) operations
@@ -61,7 +61,7 @@ The parameters are:
 * **real_funcOnlineAlgo.py**: Here are some functions for `real_onlineAlgo.py`
 * **nov2g_onlineAlgo.py, nov2g_funcOnlineAlgo.py, run_nov2g.sh, nov2g_ev_scheduler_v3.py**: Files necessary to run the `No-V2G` baseline
 
-## Contract formulation and Results Analysis
+## Contract formulation and Results Analysis :telescope:
 These files can be found inside the `Contract_Reproduction/` directory
 
 ### Contract :handshake:
@@ -70,19 +70,19 @@ These files can be found inside the `Contract_Reproduction/` directory
 ### 1OptimizationRuntime :chart_with_upwards_trend:
 This notebook measures and compares the runtime of solving Eqn. 7 & 8
 
-### 2OptimalContracts
+### 2OptimalContracts :mountain_snow:
 This notebook had previous drafts for the analysis of optimal contracts. This notebook can be ignored
 
 ### 3ContractValues :balance_scale:
 Notebook for Figure 2 and Figure 5. Also, investigates the behaviour of Eqn. 8 under different parameters. 
 
 ### 4ReloadFigSched
-Previous draft for the results of the online algorithm. This notebook can be ignored
+Previous draft for the results of the online algorithm. **This notebook can be ignored**
 
-### 5PriceElectricity
+### 5PriceElectricity :zap:
 Short notebook on exploratory data analysis (EDA) of electricity prices. This notebook can be ignored
 
-### 6DatasetsEDA
+### 6DatasetsEDA :detective:
 A longer notebook on EDA, also including EV arrivals. This notebook can be ignored
 
 ### 7PreprocessElaad :cityscape:
